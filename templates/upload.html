@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MP3 → MIDI</title>
+  </head>
+  <body>
+    <h1>Convert MP3 to MIDI</h1>
+    {% with msgs = get_flashed_messages() %}
+      {% if msgs %}
+        <ul style="color:red">
+          {% for m in msgs %}<li>{{ m }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".mp3">
+      <button type="submit">Upload & Convert</button>
+    </form>
+  </body>
+</html>
+

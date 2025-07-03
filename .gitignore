@@ -1,0 +1,15 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Flask uploads/outputs (we don't want to track these)
+uploads/
+outputs/
+
+# Virtual environments
+venv/
+.env
+
+# OS files
+.DS_Store
+
