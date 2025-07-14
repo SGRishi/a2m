@@ -6,8 +6,17 @@ from flask import Flask, request, redirect, url_for, send_from_directory, render
 import awsgi
 
 # ─── Paths ──────────────────────────────────────────────────────────────────────
-BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT  = os.path.abspath(os.path.join(BASE_DIR, '..'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# When deployed as a Netlify function, this file is placed at the root of the
+# function bundle. Locally it lives in the ``api`` directory.  If a ``templates``
+# directory exists next to this file, use it; otherwise fall back to the parent
+# directory which matches the local layout.
+if os.path.isdir(os.path.join(BASE_DIR, 'templates')):
+    PROJECT_ROOT = BASE_DIR
+else:
+    PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..'))
+
 TEMPLATES_DIR = os.path.join(PROJECT_ROOT, 'templates')
 UPLOAD_FOLDER = os.path.join(PROJECT_ROOT, 'uploads')
 OUTPUT_FOLDER = os.path.join(PROJECT_ROOT, 'outputs')

@@ -1,5 +1,7 @@
 [build]
-  command = "pip install -r requirements.txt && cp -r templates api/"
+  # Install dependencies then start the Flask app.  The port is provided by
+  # Netlify via the PORT environment variable.
+  command = "pip install -r requirements.txt && cp -r templates api/ && FLASK_APP=api/index.py flask run --host=0.0.0.0 --port=$PORT"
   functions = "api"
 
 [[redirects]]

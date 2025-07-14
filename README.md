@@ -16,10 +16,14 @@ This project provides a small Flask application that converts uploaded MP3 files
 
 ## Deploying to Netlify
 
-The repository includes a `netlify.toml` configuration for deploying the Flask app as a serverless function. When setting up your Netlify site, use the following values:
+The repository includes a `netlify.toml` configuration that installs the project
+dependencies and then starts the Flask application. Netlify provides the port
+via the `PORT` environment variable, which the `flask run` command uses.
+When setting up your Netlify site you can simply rely on the configuration in
+`netlify.toml`, which runs:
 
-- **Build command:** `pip install -r requirements.txt`
-- **Functions directory:** `api`
-
-Netlify will build the Python dependencies and deploy the `api/index.py` function. All incoming requests are redirected to this function according to `netlify.toml`.
+```bash
+pip install -r requirements.txt && \
+FLASK_APP=api/index.py flask run --host=0.0.0.0 --port=$PORT
+```
 
