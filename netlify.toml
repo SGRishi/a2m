@@ -1,5 +1,7 @@
 [build]
-  command = "pip install -r requirements.txt && cp -r templates api/"
+  # Install dependencies, copy HTML templates, and start the Flask server.
+  # Use a default port of 8888 if $PORT isn't provided by the environment.
+  command = "pip install -r requirements.txt && cp -r templates api/ && FLASK_APP=api/index.py flask run --host=0.0.0.0 --port=${PORT:-8888}"
   functions = "api"
 
 [[redirects]]
