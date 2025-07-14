@@ -1,5 +1,5 @@
 [build]
-  command = "pip install -r requirements.txt"
+  command = "pip install -r requirements.txt && cp -r templates api/"
   functions = "api"
 
 [[redirects]]
