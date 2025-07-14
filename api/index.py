@@ -47,8 +47,15 @@ def upload_file():
         # Transcribe: call Transkun CLI
         out_name = f"{uid}.mid"
         out_path = os.path.join(OUTPUT_FOLDER, out_name)
-        cmd      = ['transkun', in_path, out_path]
-        result   = subprocess.run(cmd, capture_output=True, text=True)
+        cmd = ['transkun', in_path, out_path]
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True)
+        except FileNotFoundError:
+            flash('Transkun CLI not found. Ensure the transkun package is installed.')
+            return redirect(request.url)
+        except Exception as e:
+            flash('Transcription failed: ' + str(e))
+            return redirect(request.url)
 
         if result.returncode != 0:
             flash('Transcription failed: ' + (result.stderr or 'Unknown error'))
