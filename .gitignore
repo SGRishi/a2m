@@ -17,3 +17,6 @@ venv/
 # runtime folders
 uploads/
 outputs/
+
+# runtime folders\uploads/
+outputs/
