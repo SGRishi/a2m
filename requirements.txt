@@ -5,3 +5,4 @@ pretty_midi
 numpy
 soundfile
 gunicorn
+awsgi

@@ -3,6 +3,7 @@ import os
 import uuid
 import subprocess
 from flask import Flask, request, redirect, url_for, send_from_directory, render_template, flash
+import awsgi
 
 # ─── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
@@ -68,4 +69,9 @@ def upload_file():
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(OUTPUT_FOLDER, filename, as_attachment=True)
+
+
+def handler(event, context):
+    """AWS Lambda handler entrypoint."""
+    return awsgi.response(app, event, context)
 
